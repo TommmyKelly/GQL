@@ -29,6 +29,28 @@ const resolvers = {
       UserList.push(newUser);
       return newUser;
     },
+    updateUsername: (parent, args) => {
+      const { id, newUsername } = args.input;
+
+      UserList.map((user) => {
+        if (user.id == id) {
+          user.username = newUsername;
+        }
+      });
+      const res = UserList.find((user) => user.id == id);
+      return res;
+    },
+    deleteUser: (parent, args) => {
+      const id = args.id;
+
+      UserList.forEach((user, index) => {
+        if (user.id == id) {
+          UserList.splice(index, 1);
+        }
+      });
+
+      return "Hello";
+    },
   },
   User: {
     favoriteMovies: () => {
